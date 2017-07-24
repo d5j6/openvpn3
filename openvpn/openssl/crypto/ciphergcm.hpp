@@ -69,7 +69,7 @@ namespace openvpn {
 
       void init(const CryptoAlgs::Type alg,
 		const unsigned char *key,
-		const unsigned int keysize,
+		const unsigned long keysize,
 		const int mode)
       {
 	erase();

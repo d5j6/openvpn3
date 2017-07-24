@@ -67,7 +67,7 @@ namespace openvpn {
 
     // get length of file
     ifs.seekg (0, std::ios::end);
-    const std::streamsize length = ifs.tellg();
+    const std::streamsize length = (std::streamsize)ifs.tellg();
     if (max_size && std::uint64_t(length) > max_size)
       OPENVPN_THROW(file_too_large, "file too large [" << length << '/' << max_size << "]: " << filename);
     ifs.seekg (0, std::ios::beg);

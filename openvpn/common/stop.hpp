@@ -27,6 +27,8 @@
 #include <utility>
 #include <mutex>
 
+#include <openvpn/common/size.hpp>
+
 namespace openvpn {
   class Stop
   {
@@ -76,7 +78,7 @@ namespace openvpn {
 
       Stop *const stop;
       const std::function<void()> method;
-      int index;
+      size_t index;
     };
 
     Stop()

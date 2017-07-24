@@ -49,7 +49,7 @@
     } \
     virtual int update(DigestCTX& ctx, const unsigned char *data, size_t size) const \
     { \
-      return CC_##TYPE##_Update(&ctx.u.TYPE##_ctx, data, size); \
+      return CC_##TYPE##_Update(&ctx.u.TYPE##_ctx, data, (CC_LONG)size); \
     } \
     virtual int final(DigestCTX& ctx, unsigned char *md) const \
     { \

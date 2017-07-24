@@ -293,7 +293,7 @@ namespace openvpn {
 
     private:
       const unsigned char *str;
-      unsigned int size;
+      size_t size;
     };
   }
 }

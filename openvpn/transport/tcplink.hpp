@@ -153,7 +153,7 @@ namespace openvpn {
 	return send_queue_size() == 0;
       }
 
-      unsigned int send_queue_size() const
+      unsigned long send_queue_size() const
       {
 	return queue.size()
 #ifdef OPENVPN_GREMLIN

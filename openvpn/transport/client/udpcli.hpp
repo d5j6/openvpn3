@@ -122,7 +122,7 @@ namespace openvpn {
 	return false;
       }
 
-      virtual unsigned int transport_send_queue_size()
+      virtual unsigned long transport_send_queue_size()
       {
 	return 0;
       }

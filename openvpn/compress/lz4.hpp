@@ -42,7 +42,7 @@ namespace openvpn {
     bool do_decompress(BufferAllocated& buf)
     {
       // initialize work buffer
-      const int payload_size = frame->prepare(Frame::DECOMPRESS_WORK, work);
+      const int payload_size = (int)frame->prepare(Frame::DECOMPRESS_WORK, work);
 
       // do uncompress
       const int decomp_size = LZ4_decompress_safe((const char *)buf.c_data(), (char *)work.data(),

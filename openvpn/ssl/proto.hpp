@@ -1747,7 +1747,8 @@ namespace openvpn {
       // Handle data-limited keys such as Blowfish and other 64-bit block-size ciphers.
       void data_limit_add(const DataLimit::Mode mode, const size_t size)
       {
-	const DataLimit::State state = data_limit->add(mode, size);
+        const DataLimit::State state = data_limit->add(mode,
+                                                       (DataLimit::size_type)size);
 	if (state > DataLimit::None)
 	  data_limit_event(mode, state);
       }
@@ -2309,7 +2310,7 @@ namespace openvpn {
 	if (d.is_infinite())
 	  return -1;
 	else
-	  return d.to_seconds();
+	  return (int)d.to_seconds();
       }
 
       // BEGIN KeyContext data members
@@ -2737,8 +2738,8 @@ namespace openvpn {
     void disable_keepalive(unsigned int& keepalive_ping,
 			   unsigned int& keepalive_timeout)
     {
-      keepalive_ping = config->keepalive_ping.enabled() ? config->keepalive_ping.to_seconds() : 0;
-      keepalive_timeout = config->keepalive_timeout.enabled() ? config->keepalive_timeout.to_seconds() : 0;
+      keepalive_ping = config->keepalive_ping.enabled() ? (unsigned int)config->keepalive_ping.to_seconds() : 0;
+      keepalive_timeout = config->keepalive_timeout.enabled() ? (unsigned int)config->keepalive_timeout.to_seconds() : 0;
       config->keepalive_ping = Time::Duration::infinite();
       config->keepalive_timeout = Time::Duration::infinite();
       keepalive_parms_modified();

@@ -277,7 +277,7 @@ namespace openvpn {
 	return true;
       }
 
-      virtual unsigned int transport_send_queue_size()
+      virtual unsigned long transport_send_queue_size()
       {
 	if (impl)
 	  return impl->send_queue_size();

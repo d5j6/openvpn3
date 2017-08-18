@@ -308,7 +308,7 @@ namespace openvpn {
 		  error(Error::SSL_ERROR);
 		  throw;
 		}
-	      if (size == buf->size())
+	      if (size == (ssize_t)buf->size())
 		app_write_queue.pop_front();
 	      else if (size == SSLConst::SHOULD_RETRY)
 		break;

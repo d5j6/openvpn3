@@ -2746,11 +2746,11 @@ namespace openvpn {
     }
 
     // Notify our component KeyContext when per-key Data Limits have been reached
-    void data_limit_notify(const int key_id,
+    void data_limit_notify(const unsigned int key_id,
 			   const DataLimit::Mode cdl_mode,
 			   const DataLimit::State cdl_status)
     {
-      if (primary && key_id == primary->key_id())
+      if (primary && (key_id == primary->key_id()))
 	primary->data_limit_notify(cdl_mode, cdl_status);
       else if (secondary && key_id == secondary->key_id())
 	secondary->data_limit_notify(cdl_mode, cdl_status);

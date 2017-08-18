@@ -122,7 +122,7 @@ namespace openvpn {
 
     // Data limit notification -- trigger a renegotiation
     // when cdl_status == DataLimit::Red.
-    virtual void data_limit_notify(const int key_id,
+    virtual void data_limit_notify(const unsigned int key_id,
 				   const DataLimit::Mode cdl_mode,
 				   const DataLimit::State cdl_status) = 0;
 

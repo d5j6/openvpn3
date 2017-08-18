@@ -534,7 +534,7 @@ namespace openvpn {
 	  ManLink::send->float_notify(addr);
       }
 
-      virtual void data_limit_notify(const int key_id,
+      virtual void data_limit_notify(const unsigned int key_id,
 				     const DataLimit::Mode cdl_mode,
 				     const DataLimit::State cdl_status)
       {

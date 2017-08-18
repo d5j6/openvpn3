@@ -62,7 +62,9 @@ namespace openvpn {
 
     private:
       // initialize SSL library
+#if defined(USE_OPENSSL)
       crypto_init crypto_init_;
+#endif
     };
 
     // process-wide singular instance

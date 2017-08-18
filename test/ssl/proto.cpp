@@ -542,7 +542,9 @@ private:
   size_t n_control_send_ = 0;
   size_t n_control_recv_ = 0;
   BufferPtr templ;
+#if !FEEDBACK
   size_t iteration = 0;
+#endif
   char progress_[11];
 };
 
@@ -605,7 +607,9 @@ public:
 	    const unsigned int drop_prob_arg,
 	    const unsigned int corrupt_prob_arg)
     : title(title_arg),
+#ifdef VERBOSE
       now(now_arg),
+#endif
       random(rand_arg),
       reorder_prob(reorder_prob_arg),
       drop_prob(drop_prob_arg),
@@ -756,7 +760,9 @@ private:
   }
   
   std::string title;
+#ifdef VERBOSE
   TimePtr now;
+#endif
   RandomAPI& random;
   unsigned int reorder_prob;
   unsigned int drop_prob;

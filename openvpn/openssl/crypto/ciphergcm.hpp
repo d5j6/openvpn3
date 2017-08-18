@@ -113,8 +113,8 @@ namespace openvpn {
 		   const unsigned char *ad,
 		   size_t ad_len)
       {
-	int len;
-	int ciphertext_len;
+	size_t len;
+	size_t ciphertext_len;
 
 	check_initialized();
 	if (!EVP_EncryptInit_ex(&ctx, nullptr, nullptr, nullptr, iv))
@@ -122,18 +122,18 @@ namespace openvpn {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_EncryptInit_ex (reset)");
 	  }
-	if (!EVP_EncryptUpdate(&ctx, nullptr, &len, ad, int(ad_len)))
+	if (!EVP_EncryptUpdate(&ctx, nullptr, (int *)(&len), ad, int(ad_len)))
 	  {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_EncryptUpdate AD");
 	  }
-	if (!EVP_EncryptUpdate(&ctx, output, &len, input, int(length)))
+	if (!EVP_EncryptUpdate(&ctx, output, (int *)(&len), input, int(length)))
 	  {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_EncryptUpdate data");
 	  }
 	ciphertext_len = len;
-	if (!EVP_EncryptFinal_ex(&ctx, output+len, &len))
+	if (!EVP_EncryptFinal_ex(&ctx, output+len, (int *)(&len)))
 	  {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_EncryptFinal_ex");
@@ -158,8 +158,8 @@ namespace openvpn {
 		  const unsigned char *ad,
 		  size_t ad_len)
       {
-	int len;
-	int plaintext_len;
+	size_t len;
+	size_t plaintext_len;
 
 	check_initialized();
 	if (!EVP_DecryptInit_ex(&ctx, nullptr, nullptr, nullptr, iv))
@@ -167,12 +167,12 @@ namespace openvpn {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_DecryptInit_ex (reset)");
 	  }
-	if (!EVP_DecryptUpdate(&ctx, nullptr, &len, ad, int(ad_len)))
+	if (!EVP_DecryptUpdate(&ctx, nullptr, (int *)(&len), ad, int(ad_len)))
 	  {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_DecryptUpdate AD");
 	  }
-	if (!EVP_DecryptUpdate(&ctx, output, &len, input, int(length)))
+	if (!EVP_DecryptUpdate(&ctx, output, (int *)(&len), input, int(length)))
 	  {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_DecryptUpdate data");
@@ -183,7 +183,7 @@ namespace openvpn {
 	    openssl_clear_error_stack();
 	    throw openssl_gcm_error("EVP_CIPHER_CTX_ctrl set tag");
 	  }
-	if (!EVP_DecryptFinal_ex(&ctx, output+len, &len))
+	if (!EVP_DecryptFinal_ex(&ctx, output+len, (int *)(&len)))
 	  {
 	    openssl_clear_error_stack();
 	    return false;
